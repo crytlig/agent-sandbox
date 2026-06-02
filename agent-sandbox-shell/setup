@@ -1,0 +1,5 @@
+#!/bin/bash
+docker build -t sbx-agent:v1 -f sbx.Dockerfile .
+docker image save sbx-agent:v1 -o template.tar
+sbx template load template.tar
+sbx run --template sbx-agent:v1 shell
