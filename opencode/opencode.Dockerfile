@@ -2,10 +2,6 @@ FROM docker/sandbox-templates:opencode
 
 USER root
 
-WORKDIR /home/agent
-
-COPY agents/* /home/agent/.config/opencode/agents/
-
 RUN \
   npm install -g @playwright/cli@latest && \
   playwright-cli install --skils
@@ -17,12 +13,14 @@ RUN \
   apt update -y && \
   apt install -y mise 
 
-COPY template.mise.toml /home/agent/mise.toml
+COPY --chown=agent:agent agent/* /home/agent/.config/opencode/agent/
+COPY --chown=agent:agent template.mise.toml /home/agent/mise.toml
 
 USER agent
 
 RUN mise trust -a
 
 RUN mise up
+
 RUN echo 'eval "$(/usr/bin/mise activate bash)"' >> ~/.bashrc
 
