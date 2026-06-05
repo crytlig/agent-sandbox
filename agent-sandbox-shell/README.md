@@ -38,6 +38,12 @@ To set it on the host level, there's an experimental command for `sbx secret`
 
  # When the secret is unnamed, the output might be something like:
  # sbx-cs-d2RLwcWbWTCrEPVb
+ #
+ # list secrets
+ sbx secret list
+
+ ## Remove custom secrets with:
+sbx secret rm -g --host openrouter.ai --env OPENROUTER_API_KEY
 ```
 
 Inside the sandbox, we need to reference the secret name:
